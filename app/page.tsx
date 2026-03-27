@@ -59,7 +59,7 @@ export default function Home() {
     <main className="chat-page">
       <section className="chat-card">
         <header className="chat-header">
-          <div className="wa-avatar">A</div>
+          <div className="wa-avatar">GA</div>
           <div>
             <h1>GA GPT Chatbot</h1>
             <p>online</p>
@@ -69,7 +69,7 @@ export default function Home() {
         <div ref={listRef} className="chat-list">
           {messages.length === 0 && (
             <div className="empty-state">
-              Ask a question from your uploaded theology documents.
+              Ask anything about faith, the Bible, and apologetics.
             </div>
           )}
 
