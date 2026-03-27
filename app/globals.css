@@ -1,0 +1,224 @@
+:root {
+  --background: #dbe5dd;
+  --foreground: #111b21;
+  --card: #efeae2;
+  --line: #d1d7db;
+  --user: #d9fdd3;
+  --bot: #ffffff;
+  --header: #005c4b;
+  --header-sub: #d7efe8;
+  --send: #00a884;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.chat-page {
+  min-height: 100vh;
+  padding: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-card {
+  width: min(880px, 100%);
+  height: min(92vh, 900px);
+  background: var(--card);
+  border: 1px solid #bfc9c2;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(17, 27, 33, 0.2);
+}
+
+.chat-header {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--header);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #1f7a67;
+  font-weight: 700;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.chat-header p {
+  margin: 4px 0 0;
+  color: var(--header-sub);
+  font-size: 0.78rem;
+}
+
+.chat-list {
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #efeae2;
+  background-image:
+    radial-gradient(rgba(17, 27, 33, 0.05) 0.7px, transparent 0.7px),
+    radial-gradient(rgba(17, 27, 33, 0.035) 0.7px, #efeae2 0.7px);
+  background-size: 18px 18px;
+  background-position: 0 0, 9px 9px;
+}
+
+.empty-state {
+  margin: auto;
+  max-width: 520px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  color: #5f6e7f;
+}
+
+.bubble {
+  max-width: min(78%, 680px);
+  border-radius: 9px;
+  padding: 7px 9px 8px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.bubble.user {
+  margin-left: auto;
+  background: var(--user);
+  color: #111b21;
+}
+
+.bubble.bot {
+  margin-right: auto;
+  background: var(--bot);
+  color: #111b21;
+}
+
+.bubble.user::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -6px;
+  border-top: 7px solid var(--user);
+  border-right: 7px solid transparent;
+}
+
+.bubble.bot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -6px;
+  border-top: 7px solid var(--bot);
+  border-left: 7px solid transparent;
+}
+
+.bubble-role {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.bubble-text {
+  font-size: 0.97rem;
+}
+
+.typing {
+  font-style: italic;
+  color: #52667d;
+}
+
+.chat-input-row {
+  border-top: 1px solid #cfd8d2;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  gap: 10px;
+  background: #f0f2f5;
+}
+
+.chat-input-row select {
+  border: 1px solid #d5dadf;
+  border-radius: 12px;
+  padding: 10px 8px;
+  background: #fff;
+  outline: none;
+}
+
+.chat-input-row input {
+  width: 100%;
+  border: 1px solid #d5dadf;
+  border-radius: 22px;
+  padding: 11px 14px;
+  outline: none;
+  background: #fff;
+}
+
+.chat-input-row input:focus {
+  border-color: #8db5f5;
+  box-shadow: 0 0 0 3px rgba(74, 132, 240, 0.18);
+}
+
+.chat-input-row button {
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: var(--send);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-input-row button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .chat-page {
+    padding: 0;
+  }
+
+  .chat-card {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .bubble {
+    max-width: 94%;
+  }
+
+  .chat-input-row {
+    grid-template-columns: 78px 1fr auto;
+    gap: 8px;
+  }
+}
