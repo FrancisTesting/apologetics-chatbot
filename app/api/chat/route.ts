@@ -197,12 +197,18 @@ function isUnsafeQuery(message: string): boolean {
 
 function styleInstruction(style: ResponseStyle): string {
   if (style === "short") {
-    return "Keep response to 3-5 lines max.";
+    return "Keep response very short: max 2-3 sentences, no long lists, no extra background.";
   }
   if (style === "detailed") {
     return "Give a thorough explanation in short sections with bullet points.";
   }
   return "Give a balanced answer in 1-2 short paragraphs and bullets if useful.";
+}
+
+function maxTokensForStyle(style: ResponseStyle): number {
+  if (style === "short") return 120;
+  if (style === "detailed") return 700;
+  return 320;
 }
 
 export async function POST(req: Request) {
@@ -264,7 +270,13 @@ export async function POST(req: Request) {
 
     for (const modelName of modelCandidates) {
       try {
-        const model = genAI.getGenerativeModel({ model: modelName });
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: {
+            maxOutputTokens: maxTokensForStyle(style),
+            temperature: style === "short" ? 0.4 : 0.6,
+          },
+        });
         result = await model.generateContent([
           `You are a Christian apologetics assistant.
 Speak naturally, warm, and conversationally like a helpful AI chat assistant.
