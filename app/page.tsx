@@ -21,7 +21,10 @@ export default function Home() {
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
     const userText = input.trim();
-    const nextMessages = [...messages, { role: "user", content: userText }];
+    const nextMessages: ChatMessage[] = [
+      ...messages,
+      { role: "user", content: userText },
+    ];
     setMessages(nextMessages);
     setInput("");
     setIsLoading(true);
